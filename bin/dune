@@ -1,0 +1,4 @@
+(executable
+ (public_name ocaml-boolean-parser)
+ (name main)
+ (libraries ocaml_boolean_parser))
