@@ -5,22 +5,17 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github MaelitoP/ocaml-boolean-parser))
 
-(authors "Author Name <author@example.com>")
+(authors "Maël LE PETIT <maelito.contact@gmail.com>")
 
-(maintainers "Maintainer Name <maintainer@example.com>")
+(maintainers "Maël LE PETIT <maelito.contact@gmail.com")
 
-(license LICENSE)
-
-(documentation https://url/to/documentation)
+(license MIT)
 
 (package
  (name ocaml-boolean-parser)
- (synopsis "A short synopsis")
- (description "A longer description")
- (depends ocaml)
- (tags
-  ("add topics" "to describe" your project)))
+ (synopsis "Boolean query parser for OCaml")
+ (description "A comprehensive boolean query parser implementation built from scratch")
+ (depends ocaml dune))
 
-; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
