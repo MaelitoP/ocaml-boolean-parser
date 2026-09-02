@@ -14,7 +14,7 @@ Library `boolean_parser` in `lib/`, wrapped as `Boolean_parser`. Filled in as mo
 
 | Module | Status | Role |
 |--------|--------|------|
-| (none yet) | | The library is declared in `lib/dune` and has no modules. |
+| `Ast` | done (T04) | `value` (field values: word, phrase, number, `<`, `>`, `<=`, `>=`, `N..M`) and `t` (word, phrase, field, `Not`, `And`, `Or`). No source locations, numbers as `float`. Derives `equal`, `pp`, `show` via ppx_deriving; `pp_tree` renders the box-drawing tree from the spec. |
 
 Executable in `bin/`:
 
@@ -26,10 +26,11 @@ Tests in `test/`:
 
 | File | Status | Role |
 |------|--------|------|
-| `test_ocaml_boolean_parser.ml` | placeholder | Empty test executable. |
+| `test_ast.ml` | done (T04) | alcotest suite: `Ast.equal` and `pp_tree` on the spec leaf table and the three spec trees. The alcotest `testable` for `Ast.t` lives here, not in the library. |
 
 ## Build
 
 - `dune-project`: `(lang dune 3.19)`, `(using menhir 3.0)`, `(cram enable)`, generates `ocaml-boolean-parser.opam`.
 - Dependencies: `ocaml >= 5.1`, `menhir`, `ppx_deriving`, `alcotest` and `qcheck-alcotest` for tests.
+- `lib/dune` preprocesses with `ppx_deriving.eq` and `ppx_deriving.show`; `test/dune` uses a `(tests (names ...))` stanza, one executable per module under test.
 - `flake.nix` provides the compiler, dune, ocamlformat and every library above.
