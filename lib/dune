@@ -10,3 +10,8 @@
  (modules tokens)
  (flags --only-tokens)
  (explain false))
+
+(menhir
+ (modules tokens parser)
+ (merge_into parser)
+ (flags --external-tokens Tokens))
