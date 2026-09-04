@@ -3,6 +3,7 @@ module Loc = Loc
 module Error = Error
 module Tokens = Tokens
 module Lexer = Lexer
+module Printer = Printer
 
 let lex source =
   let lexbuf = Lexing.from_string source in

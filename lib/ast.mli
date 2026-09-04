@@ -19,3 +19,4 @@ type t =
 [@@deriving eq, show]
 
 val pp_tree : Format.formatter -> t -> unit
+val value_to_string : value -> string
