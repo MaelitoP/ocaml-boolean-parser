@@ -1,5 +1,6 @@
 open Boolean_parser
 open Tokens
+open Testable
 
 let show_token = function
   | AND -> "AND"
@@ -23,9 +24,7 @@ let token =
     (fun ppf t -> Format.pp_print_string ppf (show_token t))
     ( = )
 
-let error = Alcotest.testable Error.pp Error.equal
 let tokens = Alcotest.(result (list token) error)
-let err message start stop = Error { Error.message; loc = { Loc.start; stop } }
 
 let tokenize source =
   let lexbuf = Lexing.from_string source in

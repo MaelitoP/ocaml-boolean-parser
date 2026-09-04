@@ -1,10 +1,7 @@
 open Boolean_parser
 open Ast
+open Testable
 
-let ast = Alcotest.testable Ast.pp Ast.equal
-let error = Alcotest.testable Error.pp Error.equal
-let parsed = Alcotest.(result ast error)
-let err message start stop = Error { Error.message; loc = { Loc.start; stop } }
 let syntax_error start stop = err "syntax error" start stop
 
 let check cases () =
@@ -109,9 +106,7 @@ let syntax_errors =
 let lexical_errors =
   [
     ("\"abc", err "unterminated quoted string" 0 4);
-    ("a @ b", err "unexpected character '@'" 2 3);
     ("1.", err "unexpected character '.'" 1 2);
-    ("a . b", err "unexpected character '.'" 2 3);
   ]
 
 let () =

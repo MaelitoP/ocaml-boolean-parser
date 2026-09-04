@@ -1,6 +1,6 @@
 open Boolean_parser
+open Testable
 
-let ast = Alcotest.testable Ast.pp Ast.equal
 let tree t = Format.asprintf "%a" Ast.pp_tree t
 
 let test_equal () =
