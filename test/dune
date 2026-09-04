@@ -1,5 +1,5 @@
 (tests
- (names test_ast test_error test_lexer test_parser test_printer)
+ (names test_ast test_error test_eval test_lexer test_parser test_printer)
  (libraries boolean_parser alcotest qcheck-core qcheck-alcotest))
 
 (cram
