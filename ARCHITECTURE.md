@@ -35,7 +35,8 @@ Tests in `test/`:
 
 | File | Status | Role |
 |------|--------|------|
-| `test_printer.ml` | done (T08) | alcotest suite: every distinct AST from the parser fixtures plus the parenthesization edge cases, each pinned to its canonical string and parsed back with `Boolean_parser.parse`. |
+| `gen.ml` | done (T09) | Shared test module, not an entry point: `QCheck2.Gen` generators for `Ast.t`. Size-bounded through `sized` / `fix` with the size halved per level, so shrinking works on the tree. Words start with a lowercase letter or `_` so they can never be a keyword; phrases draw from `printable` (quotes, backslashes and newlines included); numbers are `n / 100` for `n <= 100000` so `%.15g` never emits an exponent and every value lexes back. |
+| `test_printer.ml` | done (T09) | alcotest suite: every distinct AST from the parser fixtures plus the parenthesization edge cases, each pinned to its canonical string and parsed back with `Boolean_parser.parse`. Plus the qcheck property `parse (to_string ast) = Ok ast` over `Gen.ast`, 1000 runs, registered with `QCheck_alcotest.to_alcotest`; a failure prints the shrunk AST and its printed form. |
 | `test_error.ml` | done (T07) | alcotest suite pinning `Error.to_string` output: mid-line, multi-token, end-of-input, second-line, and a location spanning a newline. |
 | `test_parser.ml` | done (T06) | Table-driven alcotest suite over `Boolean_parser.parse`: every valid row of the spec examples, both precedence examples, associativity, every invalid row with its offsets. |
 | `test_lexer.ml` | done (T05) | Table-driven alcotest suite: every lexing row of the spec examples, plus lexical errors with their offsets. Carries its own `show_token` since the generated token type derives nothing. |
@@ -45,5 +46,5 @@ Tests in `test/`:
 
 - `dune-project`: `(lang dune 3.19)`, `(using menhir 3.0)`, `(cram enable)`, generates `ocaml-boolean-parser.opam`.
 - Dependencies: `ocaml >= 5.1`, `menhir`, `ppx_deriving`, `alcotest` and `qcheck-alcotest` for tests.
-- `lib/dune` has `(ocamllex lexer)` and `(menhir (modules tokens) (flags --only-tokens) (explain false))`; `explain` must be off because `--only-tokens` produces no `.conflicts` file. The parser stanza is `(menhir (modules tokens parser) (merge_into parser) (flags --external-tokens Tokens))`: menhir needs the `%token` declarations in the grammar it compiles, so `tokens.mly` is merged in rather than duplicated. It preprocesses with `ppx_deriving.eq` and `ppx_deriving.show`; `test/dune` uses a `(tests (names ...))` stanza, one executable per module under test.
+- `lib/dune` has `(ocamllex lexer)` and `(menhir (modules tokens) (flags --only-tokens) (explain false))`; `explain` must be off because `--only-tokens` produces no `.conflicts` file. The parser stanza is `(menhir (modules tokens parser) (merge_into parser) (flags --external-tokens Tokens))`: menhir needs the `%token` declarations in the grammar it compiles, so `tokens.mly` is merged in rather than duplicated. It preprocesses with `ppx_deriving.eq` and `ppx_deriving.show`; `test/dune` uses a `(tests (names ...))` stanza, one executable per module under test; modules not listed in `names` (`gen.ml`) are shared by every test executable. Test libraries: `alcotest`, `qcheck-core`, `qcheck-alcotest`.
 - `flake.nix` provides the compiler, dune, ocamlformat and every library above.

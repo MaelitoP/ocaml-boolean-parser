@@ -68,6 +68,13 @@ let fields =
     (Not (Field ("title", Word "foo")), "NOT title:foo");
   ]
 
+let round_trip =
+  QCheck2.Test.make ~name:"parse (to_string ast) = Ok ast" ~count:1000
+    ~print:(fun tree ->
+      Ast.show tree ^ "\nprinted as: " ^ Printer.to_string tree)
+    Gen.ast
+    (fun tree -> Boolean_parser.parse (Printer.to_string tree) = Ok tree)
+
 let () =
   Alcotest.run "printer"
     [
@@ -78,4 +85,5 @@ let () =
           Alcotest.test_case "precedence" `Quick (check precedence);
           Alcotest.test_case "fields" `Quick (check fields);
         ] );
+      ("round_trip", [QCheck_alcotest.to_alcotest round_trip]);
     ]
