@@ -167,7 +167,7 @@ Lexical errors:
 | `unexpected character '<c>'`   | the offending byte                         |
 | `unterminated quoted string`   | from the opening quote to the end of input |
 
-Syntax errors have the form `unexpected <token>, expected <what>`, where `<token>` is one of:
+The parser currently reports every syntax error as `syntax error`. The tailored messages specified below are the target of a future menhir `.messages` file and are not implemented. They have the form `unexpected <token>, expected <what>`, where `<token>` is one of:
 
 `AND`, `OR`, `NOT`, `'('`, `')'`, `':'`, `'..'`, `'<'`, `'>'`, `'<='`, `'>='`, `word '<text>'`, `quoted string`, `number <n>`, `end of input`
 
@@ -238,7 +238,7 @@ Trees are written with the AST constructors: `Word`, `Phrase`, `Field (name, val
 
 ### Invalid inputs
 
-Locations are `start..stop` byte offsets.
+Locations are `start..stop` byte offsets. For syntax errors the Message column shows the tailored wording specified above; the parser currently emits `syntax error`.
 
 | Input         | Location | Message                                                    |
 |---------------|----------|------------------------------------------------------------|
