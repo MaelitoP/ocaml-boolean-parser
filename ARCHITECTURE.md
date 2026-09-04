@@ -29,7 +29,7 @@ Executable in `bin/`:
 
 | Module | Status | Role |
 |--------|--------|------|
-| `Main` | placeholder | Prints `Hello, World!`. |
+| `Main` | done (T10) | `ocaml-boolean-parser [--format tree or query] [QUERY]` via `Stdlib.Arg`. Reads stdin when QUERY is omitted; prints `Ast.pp_tree` (default) or `Printer.to_string`. Exit 0 on success, 1 on a parse error (rendered with `Error.to_string` on stderr), 2 on a usage error (unknown option, bad `--format` value, more than one QUERY; `Arg.parse` prints the usage and exits itself). Only IO and exit codes live here. |
 
 Tests in `test/`:
 
