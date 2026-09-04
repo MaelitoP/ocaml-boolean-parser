@@ -2,7 +2,7 @@
 opam-version: "2.0"
 synopsis: "Boolean query parser for OCaml"
 description:
-  "A comprehensive boolean query parser implementation built from scratch"
+  "Parser, printer and evaluator for a small boolean search query language"
 maintainer: ["Maël LE PETIT <maelito.contact@gmail.com>"]
 authors: ["Maël LE PETIT <maelito.contact@gmail.com>"]
 license: "MIT"

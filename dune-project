@@ -20,7 +20,7 @@
 (package
  (name ocaml-boolean-parser)
  (synopsis "Boolean query parser for OCaml")
- (description "A comprehensive boolean query parser implementation built from scratch")
+ (description "Parser, printer and evaluator for a small boolean search query language")
  (depends
   (ocaml
    (>= 5.1))
