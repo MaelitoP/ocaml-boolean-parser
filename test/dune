@@ -1,3 +1,6 @@
 (tests
  (names test_ast test_error test_lexer test_parser test_printer)
  (libraries boolean_parser alcotest qcheck-core qcheck-alcotest))
+
+(cram
+ (deps %{bin:ocaml-boolean-parser}))
